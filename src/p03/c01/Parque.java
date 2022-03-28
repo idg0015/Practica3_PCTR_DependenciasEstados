@@ -6,15 +6,15 @@ import java.util.Hashtable;
 public class Parque implements IParque{
 
 
-	// TODO 
+	private int max_personas = 50;
 	private int contadorPersonasTotales;
 	private Hashtable<String, Integer> contadoresPersonasPuerta;
 	
 	
-	public Parque() {	// TODO
+	public Parque(int max_personas) {	// TODO
 		contadorPersonasTotales = 0;
 		contadoresPersonasPuerta = new Hashtable<String, Integer>();
-		// TODO
+		this.max_personas = max_personas;
 	}
 
 
@@ -43,9 +43,23 @@ public class Parque implements IParque{
 		
 	}
 	
-	// 
-	// TODO Método salirDelParque
-	//
+	@Override
+	public void salirDelParque(String puerta) {
+		// Si no hay salidas por esa puerta, inicializamos
+		if (contadoresPersonasPuerta.get(puerta) == null){
+			contadoresPersonasPuerta.put(puerta, 0);
+		}
+				
+		// Disminuimos el contador total y el individual
+		contadorPersonasTotales--;		
+		contadoresPersonasPuerta.put(puerta, contadoresPersonasPuerta.get(puerta)-1);
+		
+		// Imprimimos el estado del parque
+		imprimirInfo(puerta, "Salida");
+		
+		//TODO
+		
+	}
 	
 	
 	private void imprimirInfo (String puerta, String movimiento){
@@ -72,7 +86,7 @@ public class Parque implements IParque{
 		assert sumarContadoresPuerta() == contadorPersonasTotales : "INV: La suma de contadores de las puertas debe ser igual al valor del contador del parte";
 		// TODO 
 		// TODO
-		
+		//Los assert solo van aqui
 		
 		
 	}
@@ -88,6 +102,5 @@ public class Parque implements IParque{
 		// TODO
 		//
 	}
-
 
 }
