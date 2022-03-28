@@ -86,14 +86,12 @@ public class Parque implements IParque{
 		assert sumarContadoresPuerta() == contadorPersonasTotales : "INV: La suma de contadores de las puertas debe ser igual al valor del contador del parte";
 		assert contadorPersonasTotales <= max_personas: "INV: Aforo superado";
 		assert contadorPersonasTotales >= 0: "INV: No se puede salir del parque si esta vacio"; 
-		
-		
 	}
 
-	protected void comprobarAntesDeEntrar(){	// TODO
-		//
-		// TODO
-		//
+	protected synchronized void comprobarAntesDeEntrar() throws InterruptedException{
+		while(contadorPersonasTotales >= max_personas) {
+			wait();
+		}
 	}
 
 	protected void comprobarAntesDeSalir(){		// TODO
