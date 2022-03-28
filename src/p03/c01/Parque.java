@@ -100,7 +100,7 @@ public class Parque implements IParque{
 	}
 
 	protected synchronized void comprobarAntesDeEntrar() throws InterruptedException{
-		while(contadorPersonasTotales >= max_personas) {
+		while(contadorPersonasTotales == max_personas) {
 			wait();
 		}
 	}
