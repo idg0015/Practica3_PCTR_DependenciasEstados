@@ -94,10 +94,10 @@ public class Parque implements IParque{
 		}
 	}
 
-	protected void comprobarAntesDeSalir(){		// TODO
-		//
-		// TODO
-		//
+	protected synchronized void comprobarAntesDeSalir() throws InterruptedException{		
+		while(contadorPersonasTotales == 0) {
+			wait();
+		}
 	}
 
 }
