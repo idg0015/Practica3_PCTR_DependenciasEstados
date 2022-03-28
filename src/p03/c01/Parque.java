@@ -11,7 +11,7 @@ public class Parque implements IParque{
 	private Hashtable<String, Integer> contadoresPersonasPuerta;
 	
 	
-	public Parque(int max_personas) {	// TODO
+	public Parque(int max_personas) {	
 		contadorPersonasTotales = 0;
 		contadoresPersonasPuerta = new Hashtable<String, Integer>();
 		this.max_personas = max_personas;
@@ -84,9 +84,8 @@ public class Parque implements IParque{
 	
 	protected void checkInvariante() {
 		assert sumarContadoresPuerta() == contadorPersonasTotales : "INV: La suma de contadores de las puertas debe ser igual al valor del contador del parte";
-		// TODO 
-		// TODO
-		//Los assert solo van aqui
+		assert contadorPersonasTotales <= max_personas: "INV: Aforo superado";
+		assert contadorPersonasTotales >= 0: "INV: No se puede salir del parque si esta vacio"; 
 		
 		
 	}
