@@ -46,12 +46,19 @@ public class Parque implements IParque{
 	}
 	
 	@Override
-	public void salirDelParque(String puerta) {
+	public synchronized void salirDelParque(String puerta) {
 		// Si no hay salidas por esa puerta, inicializamos
 		if (contadoresPersonasPuerta.get(puerta) == null){
 			contadoresPersonasPuerta.put(puerta, 0);
 		}
 				
+        //Comprobamos si se puede salir
+		try {
+			this.comprobarAntesDeSalir();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 		// Disminuimos el contador total y el individual
 		contadorPersonasTotales--;		
 		contadoresPersonasPuerta.put(puerta, contadoresPersonasPuerta.get(puerta)-1);
@@ -59,8 +66,10 @@ public class Parque implements IParque{
 		// Imprimimos el estado del parque
 		imprimirInfo(puerta, "Salida");
 		
-		//TODO
-		
+		//Comprobamos los invariantes
+		checkInvariante();
+		//Notificamos a todos los hilos
+		notifyAll();		
 	}
 	
 	
