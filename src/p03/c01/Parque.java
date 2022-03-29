@@ -99,13 +99,13 @@ public class Parque implements IParque{
 		assert contadorPersonasTotales >= 0: "INV: No se puede salir del parque si esta vacio"; 
 	}
 
-	protected synchronized void comprobarAntesDeEntrar() throws InterruptedException{
+	protected void comprobarAntesDeEntrar() throws InterruptedException{
 		while(contadorPersonasTotales == max_personas) {
 			wait();
 		}
 	}
 
-	protected synchronized void comprobarAntesDeSalir() throws InterruptedException{		
+	protected void comprobarAntesDeSalir() throws InterruptedException{		
 		while(contadorPersonasTotales == 0) {
 			wait();
 		}
